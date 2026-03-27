@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Study Mood Website</title>
+
+<style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      transition: 0.5s;
+      padding-top: 100px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #msg {
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    #timer {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+    button :hover{
+       transform: scale(1.1);
+       box-shadow: 0 0 15px rgb(153, 237, 217);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Choose Your Study Mood 😎</h1>
+
+  <button onclick="setMood('focus')">😎Focus</button>
+  <button onclick="setMood('lazy')">😴Lazy</button>
+  <button onclick="setMood('stress')">😵Stress</button>
+
+  <div id="msg"></div>
+  <div id="timer"></div>
+
+  <audio id="bgMusic" src="focus.mp3.m4a"></audio>
+  <audio id="bgMusic" src="chill.mp3.m4a"></audio>
+  <audio id="bgMusic" src="lazy.mp3.mp3"></audio>
+
+  <script>
+
+    let time = 0;
+    let timerInterval;
+    let music = document.getElementById("bgMusic");
+
+    function startTimer() 
+    {
+    clearInterval(timerInterval);
+    time = 0;
+    
+
+    timerInterval = setInterval(() => {
+    time++;
+    document.getElementById("timer").innerText ="Timer: " + time + " sec";}, 1000);
+    }
+
+    function setMood(mood) 
+    {
+    music.pause();
+    music.currentTime = 0;
+
+    if (mood === 'focus') 
+    {
+    document.body.style.background = "linear-gradient(to right, #000000,#434343)";
+    document.body.style.color = "white";
+    document.getElementById("msg").innerText = "Stay Focused🔥";
+
+    music.src = "focus.mp3.m4a";
+    music.play();
+    }
+
+    else if (mood === 'lazy') 
+    {
+    document.body.style.background ="linear-gradient(to right, #bdc3c7 ,#2c3e50";
+    document.body.style.color ="white";
+    document.getElementById("msg").innerText ="Chill bro😴";
+
+    music.src ="lazy.mp3.mp3";
+    music.play();
+    }
+
+    else 
+    {
+    document.body.style.background ="lightblue";
+    document.body.style.color ="black";
+    document.getElementById("msg").innerText ="Take a break😌";
+    
+    music.src ="chill.mp3.m4a";
+    music.play();
+    }
+    startTimer();
+
+    }
+</script>
+
+</body>
+</html>
